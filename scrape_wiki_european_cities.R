@@ -51,6 +51,14 @@ df.euro_cities <- df.euro_cities %>% filter(population > 1000000)
 #=================
 
 df.euro_cities <- df.euro_cities %>% as_tibble()
-data.geo <- geocode(df.euro_cities$city)
 
-?geocode
+#========================================================
+# GEOCODE
+# - here, we're just getting longitude and latitude data 
+#   using ggmap::geocode()
+#========================================================
+
+data.geo <- data.frame(city=df.euro_cities$city,geocode(df.euro_cities$city))
+t1<-data.geo %>% filter(data.geo$lon %>% is.na())  %>% select(city)
+
+data.geo %>% head()
